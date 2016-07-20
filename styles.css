@@ -10,3 +10,15 @@ body {
   height: 250px;
   background-color: #EFE;
 }
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+g {
+  font-family: sans-serif;
+  font-size: 12px;
+}

@@ -77,19 +77,37 @@ var width = 600;
 
 var yScale = d3.scale.linear()
   .domain([0, d3.max(dataSet)*1.1])
-  .range([0, height])
+  .range([0, height]);
 
 var xScale = d3.scale.ordinal()
   .domain(dataSet)
-  .rangeBands([0, width], 0.25, 0.25)
+  .rangeBands([0, width], 0.25, 0.25);
 
 var colorScale = d3.scale.linear()
 .domain([0, dataSet.length])
-.range(['tomato', 'cornflowerBlue'])
+.range(['tomato', 'cornflowerBlue']);
 
 var svg = d3.select('#barChart').append('svg')
   .attr('width', width)
-  .attr('height', height)
+  .attr('height', height);
+
+var xAxis = d3.svg.axis()
+  .scale(xScale)
+  .orient('bottom')
+  .ticks(10)
+  .innerTickSize(10)
+  .outerTickSize(10)
+  .tickPadding(10);
+
+svg.append('g')
+  .attr('class', 'x axis')
+  .attr('transform', 'translate(0, '+ (height + 10 ) +')')
+  .call(xAxis);
+
+svg.selectAll('g')
+  .style('fill', function(data, i) {
+    return colorScale(i)
+  })
 
 svg.selectAll('rect')
   .data(dataSet)
